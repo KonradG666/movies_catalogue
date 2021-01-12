@@ -4,7 +4,6 @@ import random
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def homepage():
     choosen_list = request.args.get('list_type', "popular")
