@@ -6,16 +6,18 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage():
+    type = {1 : "popular", 2 : "top_rated", 3 : "upcoming", 4 : 'now_playing'}
     choosen_list = request.args.get('list_type', "popular")
     movies = tmdb_client.get_movies(how_many=8, list_type=choosen_list)
     random.shuffle(movies)
-    return render_template("homepage.html", movies=movies, choosen_list=choosen_list)
+    return render_template("homepage.html", movies=movies, choosen_list=choosen_list, type=type)
 
 @app.route("/movie/<movie_id>")
 def movie_details(movie_id):
     details = tmdb_client.get_single_movie(movie_id)
     cast = tmdb_client.get_single_movie_cast(movie_id)
     movie_images = tmdb_client.get_movie_images(movie_id)
+    selected_backdrop = random.choice(movie_images['backdrops'])
     return render_template("movie_details.html", movie=details, cast=cast, images=movie_images)
 
 @app.context_processor
@@ -25,4 +27,5 @@ def utility_processor():
     return {"tmdb_image_url": tmdb_image_url}
 
 if __name__ == '__main__':
+    app.run(debug=True)
     app.run(debug=True)

@@ -1,5 +1,6 @@
 {% extends "index.html" %}
 
+
 {% block content %}
 <div class="container">
 
@@ -14,10 +15,10 @@
      </div>
      <div class="col-md-4">
          <h3>{{ movie.tagline }}</h3>
-       <p>
+       	 <p>
            {{ movie.overview}}
-       </p>
-       <dl>
+         </p>
+         <dl>
            <dt>Budget</dt>
            <dd>{{ movie.budget }}</dd>
            <dt>Genre</dt>
@@ -25,22 +26,22 @@
          </dl>
      </div>
   </div>
-    <h3 class="my-4">Cast</h3>
+  <h3 class="my-4">Cast</h3>
   <div class="row">
-   {% for actor in cast %}
-       <div class="col-md-3 col-sm-6 mb-4">
+   	{% for actor in cast %}
+   	<div class="col-md-3 col-sm-6 mb-4">
            <a href="#">
                <figure class="figure">
 		  {% if actor.profile_path %}
-                  	<img src="{{ tmdb_image_url(actor.poster_path, 'w185') }}" class="figure-img img-fluid rounded" alt="{{ actor.name }}">
+                  <img src="{{ tmdb_image_url(actor.profile_path, 'w185') }}" class="figure-img img-fluid rounded" alt="{{ actor.name }}">
                   {% else %}
-                  	<img src="https://placehold.it/185x278?text={{ actor.name }}" class="figure-img img-fluid rounded" alt="{{ actor.name }}">
+                  <img src="https://placehold.it/185x278?text={{ actor.name }}" class="figure-img img-fluid rounded" alt="{{ actor.name }}">
                   {% endif %}
-                  	<figcaption class="figure-caption">{{ actor.name }} as {{ actor.character }}</figcaption>
+                  <figcaption class="figure-caption">{{ actor.name }} as {{ actor.character }}</figcaption>
                </figure>
            </a>
        </div>
-   {% endfor %}
+       {% endfor %}
   </div>
 </div>
 
