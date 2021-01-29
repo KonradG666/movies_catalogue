@@ -3,7 +3,6 @@ import os
 
 API_TOKEN = os.environ.get("TMDB_API_TOKEN", "")
 
-
 def get_popular_movies():
     endpoint = "https://api.themoviedb.org/3/movie/popular"
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
